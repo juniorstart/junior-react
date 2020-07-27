@@ -1,9 +1,9 @@
-export interface Login {
+export interface Auth {
   login: string;
   password: string;
 }
 
-export interface Register extends Login {
+export interface User extends Auth {
   firstName: string;
   lastName: string;
   email: string;
