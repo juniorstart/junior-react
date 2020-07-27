@@ -9,23 +9,20 @@ export interface Register extends Login {
   email: string;
 }
 
-export interface CreateRecruitment {
+export interface Recruitment {
+  id?: string;
   companyName: string;
   workPlace: string;
   notes: string;
   dateOfCompanyReply: string;
   linkToApplication: string;
-}
-
-export interface UpdateRecruitment extends CreateRecruitment {
-  id: number;
   city: string;
   applicationDate: string;
   companyReply: boolean;
-  ownerId: number;
+  ownerId?: string;
 }
 
-export interface CreateTodoList {
+export interface TodoList {
   id?: number;
   name: string;
   tasks?: Task[];
@@ -33,14 +30,7 @@ export interface CreateTodoList {
   status?: boolean;
 }
 
-interface Task {
-  id: number;
-  description: string;
-  status: boolean;
-  todoListId: number;
-}
-
-export interface CreateAndUpdateTask {
+export interface Task {
   id: number;
   description: string;
   status: boolean;

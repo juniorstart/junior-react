@@ -4,6 +4,6 @@ const apiRoutes = {
   recruitment: '/api/recruitment',
   todoLists: '/api/todolists',
   todoListsTask: '/api/todolists/task',
-  todoListsTodoList: '/api/todolists/todolist',
+  todoList: '/api/todolists/todolist',
 };
 export default apiRoutes;
