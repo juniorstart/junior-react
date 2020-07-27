@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form__field {
+  @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 my-2 text-base leading-tight;
+}
+
+.form__field:focus {
+  @apply outline-none bg-white border-gray-500;
+}
+
+.form__field--error {
+  @apply border-red-500;
+}
+
+.form__label {
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold;
+}
+
+.form__label:last-child {
+  @apply mb-0;
+}
+
+.form__error {
+  @apply text-red-500 text-xs italic normal-case font-normal;
+}
+
+.form__control {
+  @apply w-full px-3 mb-6;
+}
