@@ -1,9 +1,11 @@
 import React from 'react';
 import RegisterForm from './components/RegisterForm';
+import BackToHome from './components/BackToHome';
 
 const Register: React.FC = () => {
   return (
     <section className="flex flex-col-reverse md:flex-row min-h-screen">
+      <BackToHome />
       <div className="self-center flex justify-center md:w-2/4">
         <div className="p-10 lg:p-0 lg:w-8/12 xl:w-2/4">
           <h1 className="text-2xl mb-10">Register</h1>
