@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn {
+  @apply rounded py-3 px-4;
+}
+
+.btn--primary {
+  @apply bg-primary-500 border-primary-500 text-white;
+}
+
 .form__field {
   @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 my-2 text-base leading-tight;
 }
@@ -23,9 +31,9 @@
 }
 
 .form__error {
-  @apply text-red-500 text-xs italic normal-case font-normal;
+  @apply text-red-500 text-xs normal-case font-normal;
 }
 
 .form__control {
-  @apply w-full px-3 mb-6;
+  @apply w-full mb-6;
 }
