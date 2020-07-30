@@ -22,9 +22,9 @@ function Routes() {
       {/* TODO: Loader */}
       <Switch>
         <Route exact path={routes.home.path} component={HomePage} />
-        <Route exact path={routes.register.path} component={Register} />
+        <Route path={routes.register.path} component={Register} />
         <Route exact path={routes.products.root.path} component={Products} />
-        <Route exact path={routes.products.single.path} component={SingleProduct} />
+        <Route path={routes.products.single.path} component={SingleProduct} />
       </Switch>
     </Suspense>
   );
