@@ -51,12 +51,7 @@ export const registerUser = (user: User): AppThunk => async (dispatch: Dispatch)
     await api.register(user);
     dispatch(registerUserSuccess());
   } catch (err) {
-    if (
-      err.response &&
-      err.response.status === 500 &&
-      err.response.data &&
-      err.response.data.ErrorMessage
-    ) {
+    if (err.response.status === 500 && err?.response?.data?.ErrorMessage) {
       dispatch(loginError(err.response.data.ErrorMessage));
     }
     dispatch(registerUserError(err.toString()));
