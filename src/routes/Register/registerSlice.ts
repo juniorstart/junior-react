@@ -9,12 +9,14 @@ interface RegisterState {
   error: Error;
   isLoading: boolean;
   loginError: string | null;
+  success: boolean;
 }
 
 const initialState: RegisterState = {
   error: null,
   isLoading: false,
   loginError: null,
+  success: false,
 };
 
 export const registerSlice = createSlice({
@@ -23,16 +25,21 @@ export const registerSlice = createSlice({
   reducers: {
     registerUserStart: (state) => {
       state.isLoading = true;
+      state.loginError = null;
+      state.success = false;
     },
     registerUserSuccess: (state) => {
       state.isLoading = false;
+      state.success = true;
     },
     registerUserError: (state, action: PayloadAction<Error>) => {
       state.isLoading = false;
+      state.success = false;
       state.error = action.payload;
     },
     loginError: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
+      state.success = false;
       state.loginError = action.payload;
     },
   },
