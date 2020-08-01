@@ -27,7 +27,7 @@ function Routes() {
         <Route exact path={routes.home.path} component={HomePage} />
         <Route path={routes.register.path} component={Register} />
         <Route path={routes.login.path} component={Login} />
-        <AuthRequiredRoute exact path={routes.products.root.path} component={Products} />
+        <AuthRequiredRoute path={routes.products.root.path} component={Products} />
         <Route path={routes.products.single.path} component={SingleProduct} />
       </Switch>
     </Suspense>

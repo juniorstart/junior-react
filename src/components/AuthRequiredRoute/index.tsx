@@ -5,7 +5,7 @@ import { Route, Redirect, RouteComponentProps } from 'react-router-dom';
 interface Props {
   component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
   path: string;
-  exact: boolean;
+  exact?: boolean;
 }
 
 const AuthRequiredRoute: React.FC<Props> = ({ component, path, exact }) => {
