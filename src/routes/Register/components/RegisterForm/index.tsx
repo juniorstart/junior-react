@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import { registerUser, selectRegister } from 'routes/Register/registerSlice';
 import msg from 'helpers/errorMessages';
+import { useHistory } from 'react-router-dom';
+import { routes } from 'routes';
 
 const schema = yup.object().shape({
   firstName: yup.string().required(msg.required).max(30, msg.max),
@@ -35,9 +37,10 @@ interface IFormInputs {
 
 const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
-  const { loginError } = useSelector(selectRegister);
+  const history = useHistory();
+  const { loginError, success } = useSelector(selectRegister);
 
-  const { register, handleSubmit, errors, setError } = useForm<IFormInputs>({
+  const { register, handleSubmit, errors, setError, clearErrors } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
 
@@ -52,7 +55,14 @@ const RegisterForm: React.FC = () => {
         message: loginError,
       });
     }
-  }, [loginError]);
+  }, [loginError, setError]);
+
+  useEffect(() => {
+    if (success) {
+      clearErrors();
+      history.push(routes.login.path);
+    }
+  }, [success]);
 
   const { firstName, lastName, email, login, password } = errors;
 
