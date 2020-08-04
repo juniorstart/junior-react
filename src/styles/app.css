@@ -37,3 +37,39 @@
 .form__control {
   @apply w-full mb-6;
 }
+
+.nav__link {
+  @apply mt-4 ease-in transition duration-100;
+}
+
+.nav__link.active,
+.nav__link:hover {
+  @apply text-primary-500;
+}
+
+.nav__btn {
+  @apply border border-primary-500 text-primary-500 py-3 px-6 rounded-md inline-block;
+}
+
+.nav__btn:hover {
+  @apply bg-primary-500 text-white;
+}
+
+.page {
+  height: 400px;
+  padding-bottom: 4rem;
+  padding-top: 62px;
+}
+
+.page__container {
+  min-height: calc(100vh - 336px);
+}
+
+@screen md {
+  .nav__link {
+    @apply mr-8 mt-0;
+  }
+  .page {
+    padding-top: 82px;
+  }
+}

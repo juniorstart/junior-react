@@ -20,4 +20,5 @@ export const isTokenValid = (token?: string): boolean => {
 
 export const logout = (): void => {
   localStorage.removeItem('token');
+  window.location.href = '/login';
 };

@@ -62,7 +62,7 @@ const RegisterForm: React.FC = () => {
       clearErrors();
       history.push(routes.login.path);
     }
-  }, [success]);
+  }, [success, clearErrors, history]);
 
   const { firstName, lastName, email, login, password } = errors;
 
