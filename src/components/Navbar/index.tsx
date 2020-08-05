@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { routes } from 'routes';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import cs from 'classnames';
-import { isTokenValid, logout } from 'helpers/auth/session';
+import { deleteToken } from 'routes/Login/loginSlice';
+import { routes } from 'routes';
+import { isTokenValid, removeToken } from 'helpers/auth/session';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const userIsLogin = isTokenValid();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const userIsLogged = isTokenValid();
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(deleteToken());
+    removeToken();
+    history.push(routes.login.path);
+  };
 
   const getAuthenticatedNavLinks = () => (
     <>
@@ -16,7 +30,7 @@ const Navbar: React.FC = () => {
       <NavLink className="nav__link" to={routes.recruitments.path}>
         Recruitments
       </NavLink>
-      <button className="nav__btn mt-4 md:mt-0" type="button" onClick={logout}>
+      <button className="nav__btn mt-4 md:mt-0" type="button" onClick={handleLogout}>
         Logout
       </button>
     </>
@@ -39,7 +53,7 @@ const Navbar: React.FC = () => {
       <button
         type="button"
         className="block text-gray-500 hover:text-white focus:text-white focus:outline-none"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleClick}
       >
         <div className="md:hidden text-black">
           <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -63,7 +77,7 @@ const Navbar: React.FC = () => {
           hidden: !isOpen,
         })}
       >
-        {userIsLogin ? getAuthenticatedNavLinks() : getNotAuthenticatedNavLinks()}
+        {userIsLogged ? getAuthenticatedNavLinks() : getNotAuthenticatedNavLinks()}
       </nav>
     </div>
   );

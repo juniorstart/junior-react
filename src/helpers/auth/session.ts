@@ -9,7 +9,7 @@ export const getToken = (): string | null => {
 };
 
 export const isTokenValid = (token?: string): boolean => {
-  const checkedToken = getToken() || token;
+  const checkedToken = token || getToken();
 
   if (checkedToken) {
     const { exp } = decode(checkedToken);
@@ -18,7 +18,6 @@ export const isTokenValid = (token?: string): boolean => {
   return false;
 };
 
-export const logout = (): void => {
+export const removeToken = (): void => {
   localStorage.removeItem('token');
-  window.location.href = '/login';
 };
