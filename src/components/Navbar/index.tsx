@@ -4,13 +4,12 @@ import { useDispatch } from 'react-redux';
 import cs from 'classnames';
 import { deleteToken } from 'routes/Login/loginSlice';
 import { routes } from 'routes';
-import { isTokenValid, removeToken } from 'helpers/auth/session';
+import { removeToken, isAuthenticated } from 'helpers/auth/session';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-  const userIsLogged = isTokenValid();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -77,7 +76,7 @@ const Navbar: React.FC = () => {
           hidden: !isOpen,
         })}
       >
-        {userIsLogged ? getAuthenticatedNavLinks() : getNotAuthenticatedNavLinks()}
+        {isAuthenticated() ? getAuthenticatedNavLinks() : getNotAuthenticatedNavLinks()}
       </nav>
     </div>
   );
