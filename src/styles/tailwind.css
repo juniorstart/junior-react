@@ -15142,6 +15142,28 @@ video {
   }
 }
 
+table thead th:first-child div {
+  margin-left: 0;
+}
+
+table thead th:last-child div {
+  margin-right: 0;
+}
+
+table tbody td:first-child {
+  padding-left: 0;
+}
+
+table tbody td:last-child {
+  padding-right: 0;
+}
+
+table tbody tr:hover td {
+  --bg-opacity: 1;
+  background-color: #f7fafc;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
