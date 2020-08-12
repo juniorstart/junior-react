@@ -8,16 +8,17 @@ export const getToken = (): string | null => {
   return localStorage.getItem('token') || null;
 };
 
-export const isTokenValid = (token?: string): boolean => {
-  const checkedToken = token || getToken();
-
-  if (checkedToken) {
-    const { exp } = decode(checkedToken);
-    return Date.now() <= exp * 1000;
-  }
-  return false;
+export const isTokenValid = (token: string): boolean => {
+  const { exp } = decode(token);
+  return Date.now() <= exp * 1000;
 };
 
 export const removeToken = (): void => {
   localStorage.removeItem('token');
+};
+
+export const isAuthenticated = (): boolean => {
+  const token = getToken();
+
+  return Boolean(token && isTokenValid(token));
 };
