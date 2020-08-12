@@ -3,7 +3,7 @@ import Page from 'components/Page';
 
 const Home: React.FC = () => {
   return (
-    <Page>
+    <Page title="Homepage">
       <form className="w-full max-w-lg form">
         <div className="form__control">
           <label className="form__label" htmlFor="grid-first-name">

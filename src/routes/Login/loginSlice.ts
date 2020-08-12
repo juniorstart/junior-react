@@ -43,10 +43,19 @@ export const loginSlice = createSlice({
       state.isLoading = false;
       state.loginError = action.payload;
     },
+    deleteToken: (state) => {
+      state.token = null;
+    },
   },
 });
 
-export const { loginUserStart, loginUserSuccess, loginUserError, loginError } = loginSlice.actions;
+export const {
+  loginUserStart,
+  loginUserSuccess,
+  loginUserError,
+  loginError,
+  deleteToken,
+} = loginSlice.actions;
 
 export const loginUser = (user: Auth): AppThunk => async (dispatch: Dispatch) => {
   try {
