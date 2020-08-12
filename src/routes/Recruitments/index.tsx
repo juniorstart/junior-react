@@ -11,7 +11,7 @@ const Recruitments: React.FC = () => {
 
   useEffect(() => {
     dispatch(getRecruitments());
-  }, []);
+  }, [dispatch]);
 
   const columns = [
     { accessor: 'id', Header: 'Id' },
@@ -45,10 +45,12 @@ const Recruitments: React.FC = () => {
     },
   ];
 
+  if (!data) return null;
+
   return (
     <Page title="Recruitments">
       <h1 className="text-xl mb-4">Recruitments</h1>
-      {data && <Table data={data} columns={columns} />}
+      <Table data={data} columns={columns} />
     </Page>
   );
 };

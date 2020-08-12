@@ -20,13 +20,13 @@ interface Data {
 interface RecruitmentState {
   error: Error;
   isLoading: boolean;
-  data: Data[];
+  data: Data[] | null;
 }
 
 const initialState: RecruitmentState = {
   error: null,
   isLoading: false,
-  data: [],
+  data: null,
 };
 
 export const recruitmentSlice = createSlice({
@@ -36,6 +36,7 @@ export const recruitmentSlice = createSlice({
     getRecruitmentsStart: (state) => {
       state.isLoading = true;
       state.error = null;
+      state.data = null;
     },
 
     getRecruitmentsSuccess: (state, action: PayloadAction<Data[]>) => {
@@ -44,6 +45,7 @@ export const recruitmentSlice = createSlice({
     },
     getRecruitmentsError: (state, action: PayloadAction<Error>) => {
       state.isLoading = false;
+      state.data = null;
       state.error = action.payload;
     },
   },
