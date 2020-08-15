@@ -17,20 +17,20 @@ interface Data {
   ownerId: number;
 }
 
-interface RecruitmentState {
+interface RecruitmentsState {
   error: Error;
   isLoading: boolean;
   data: Data[] | null;
 }
 
-const initialState: RecruitmentState = {
+const initialState: RecruitmentsState = {
   error: null,
   isLoading: false,
   data: null,
 };
 
-export const recruitmentSlice = createSlice({
-  name: 'recruitment',
+export const recruitmentsSlice = createSlice({
+  name: 'recruitments',
   initialState,
   reducers: {
     getRecruitmentsStart: (state) => {
@@ -55,7 +55,7 @@ export const {
   getRecruitmentsStart,
   getRecruitmentsSuccess,
   getRecruitmentsError,
-} = recruitmentSlice.actions;
+} = recruitmentsSlice.actions;
 
 export const getRecruitments = (): AppThunk => async (dispatch: Dispatch) => {
   try {
@@ -67,6 +67,6 @@ export const getRecruitments = (): AppThunk => async (dispatch: Dispatch) => {
   }
 };
 
-export const selectRecruitments = (state: RootState): RecruitmentState => state.recruitments;
+export const selectRecruitments = (state: RootState): RecruitmentsState => state.recruitments;
 
-export default recruitmentSlice.reducer;
+export default recruitmentsSlice.reducer;

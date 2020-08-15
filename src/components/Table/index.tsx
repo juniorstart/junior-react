@@ -3,14 +3,14 @@ import { useTable, Column, useSortBy } from 'react-table';
 import { ReactComponent as ArrowDown } from './arrow-down.svg';
 import { ReactComponent as ArrowUp } from './arrow-up.svg';
 
-type Data = any;
+type Data = Record<string, unknown>;
 
-type Props = {
+type Props<T extends Data> = {
+  data: T[];
   columns: Column<Data>[];
-  data: Data[];
 };
 
-const Table: React.FC<Props> = ({ columns, data }) => {
+const Table: React.FC<Props<Data>> = ({ columns, data }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     {
       columns,
