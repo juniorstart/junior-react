@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
 import Table from 'components/Table';
 import Page from 'components/Page';
+import formatDate from 'helpers/date/formatDate';
 import { getRecruitments, selectRecruitments } from './recruitmentsSlice';
 
 const Recruitments: React.FC = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector(selectRecruitments);
+  const { recruitments } = useSelector(selectRecruitments);
 
   useEffect(() => {
     dispatch(getRecruitments());
@@ -21,12 +21,12 @@ const Recruitments: React.FC = () => {
     {
       accessor: 'dateOfCompanyReply',
       Header: 'Company Reply',
-      Cell: ({ value }: { value: string }) => moment(value).format('DD.MM.YYYY'),
+      Cell: ({ value }: { value: string }) => formatDate(value),
     },
     {
       accessor: 'applicationDate',
       Header: 'Application date',
-      Cell: ({ value }: { value: string }) => moment(value).format('DD.MM.YYYY'),
+      Cell: ({ value }: { value: string }) => formatDate(value),
     },
     {
       accessor: 'companyReply',
@@ -45,12 +45,12 @@ const Recruitments: React.FC = () => {
     },
   ];
 
-  if (!data) return null;
+  if (!recruitments.length) return null;
 
   return (
     <Page title="Recruitments">
       <h1 className="text-xl mb-4">Recruitments</h1>
-      <Table data={data} columns={columns} />
+      {recruitments.length && <Table data={recruitments} columns={columns} />}
     </Page>
   );
 };

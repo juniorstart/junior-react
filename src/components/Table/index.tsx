@@ -3,7 +3,7 @@ import { useTable, Column, useSortBy } from 'react-table';
 import { ReactComponent as ArrowDown } from './arrow-down.svg';
 import { ReactComponent as ArrowUp } from './arrow-up.svg';
 
-type Data = Record<string, unknown>;
+type Data = Record<string, any>;
 
 type Props<T extends Data> = {
   data: T[];

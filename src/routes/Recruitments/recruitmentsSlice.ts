@@ -4,7 +4,7 @@ import api from 'api/recruitments';
 
 type Error = string | null;
 
-interface Data {
+interface Recruitments {
   id: number;
   companyName: string;
   city: string;
@@ -20,13 +20,13 @@ interface Data {
 interface RecruitmentsState {
   error: Error;
   isLoading: boolean;
-  data: Data[] | null;
+  recruitments: Recruitments[];
 }
 
 const initialState: RecruitmentsState = {
   error: null,
   isLoading: false,
-  data: null,
+  recruitments: [],
 };
 
 export const recruitmentsSlice = createSlice({
@@ -36,16 +36,15 @@ export const recruitmentsSlice = createSlice({
     getRecruitmentsStart: (state) => {
       state.isLoading = true;
       state.error = null;
-      state.data = null;
+      state.recruitments = [];
     },
-
-    getRecruitmentsSuccess: (state, action: PayloadAction<Data[]>) => {
+    getRecruitmentsSuccess: (state, action: PayloadAction<Recruitments[]>) => {
       state.isLoading = false;
-      state.data = action.payload;
+      state.recruitments = action.payload;
     },
     getRecruitmentsError: (state, action: PayloadAction<Error>) => {
       state.isLoading = false;
-      state.data = null;
+      state.recruitments = [];
       state.error = action.payload;
     },
   },
