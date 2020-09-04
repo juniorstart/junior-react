@@ -73,3 +73,23 @@
     padding-top: 82px;
   }
 }
+
+table thead th:first-child div {
+  margin-left: 0;
+}
+
+table thead th:last-child div {
+  margin-right: 0;
+}
+
+table tbody td:first-child {
+  padding-left: 0;
+}
+
+table tbody td:last-child {
+  padding-right: 0;
+}
+
+table tbody tr:hover td {
+  @apply bg-gray-100;
+}
