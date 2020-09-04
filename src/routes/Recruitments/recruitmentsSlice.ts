@@ -33,16 +33,16 @@ export const recruitmentsSlice = createSlice({
   name: 'recruitments',
   initialState,
   reducers: {
-    getRecruitmentsStart: (state) => {
+    setRecruitmentsLoading: (state) => {
       state.isLoading = true;
       state.error = null;
       state.recruitments = [];
     },
-    getRecruitmentsSuccess: (state, action: PayloadAction<Recruitments[]>) => {
+    setRecruitments: (state, action: PayloadAction<Recruitments[]>) => {
       state.isLoading = false;
       state.recruitments = action.payload;
     },
-    getRecruitmentsError: (state, action: PayloadAction<Error>) => {
+    setRecruitmentsError: (state, action: PayloadAction<Error>) => {
       state.isLoading = false;
       state.recruitments = [];
       state.error = action.payload;
@@ -51,18 +51,18 @@ export const recruitmentsSlice = createSlice({
 });
 
 export const {
-  getRecruitmentsStart,
-  getRecruitmentsSuccess,
-  getRecruitmentsError,
+  setRecruitmentsLoading,
+  setRecruitments,
+  setRecruitmentsError,
 } = recruitmentsSlice.actions;
 
 export const getRecruitments = (): AppThunk => async (dispatch: Dispatch) => {
   try {
-    dispatch(getRecruitmentsStart());
+    dispatch(setRecruitmentsLoading());
     const { data } = await api.getRecruitments();
-    dispatch(getRecruitmentsSuccess(data));
+    dispatch(setRecruitments(data));
   } catch (err) {
-    dispatch(getRecruitmentsError(err.toString()));
+    dispatch(setRecruitmentsError(err.toString()));
   }
 };
 
