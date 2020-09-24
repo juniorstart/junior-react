@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from 'app/store';
 import api from 'api/recruitments';
+import { CreateRecruitmentFormData } from '../../types/CreateRecruitmentFormData';
+import ApiStatuses from "../../types/ApiStatuses";
 
 type Error = string | null;
 
@@ -19,13 +21,15 @@ interface Recruitments {
 
 interface RecruitmentsState {
   error: Error;
-  isLoading: boolean;
+  isFetching: boolean;
+  updateStatus: keyof typeof ApiStatuses;
   recruitments: Recruitments[];
 }
 
 const initialState: RecruitmentsState = {
   error: null,
-  isLoading: false,
+  isFetching: false,
+  updateStatus: ApiStatuses.idle,
   recruitments: [],
 };
 
@@ -34,17 +38,27 @@ export const recruitmentsSlice = createSlice({
   initialState,
   reducers: {
     setRecruitmentsLoading: (state) => {
-      state.isLoading = true;
+      state.isFetching = true;
       state.error = null;
       state.recruitments = [];
     },
     setRecruitments: (state, action: PayloadAction<Recruitments[]>) => {
-      state.isLoading = false;
+      state.isFetching = false;
       state.recruitments = action.payload;
     },
     setRecruitmentsError: (state, action: PayloadAction<Error>) => {
-      state.isLoading = false;
+      state.isFetching = false;
       state.recruitments = [];
+      state.error = action.payload;
+    },
+    createRecruitmentLoading: (state) => {
+      state.updateStatus = ApiStatuses.loading;
+    },
+    createRecruitmentSuccess: (state, action: PayloadAction<Recruitments[]>) => {
+      state.updateStatus = ApiStatuses.succeeded;
+    },
+    createRecruitmentError: (state, action: PayloadAction<Error>) => {
+      state.updateStatus = ApiStatuses.failed;
       state.error = action.payload;
     },
   },
@@ -54,6 +68,9 @@ export const {
   setRecruitmentsLoading,
   setRecruitments,
   setRecruitmentsError,
+  createRecruitmentLoading,
+  createRecruitmentSuccess,
+  createRecruitmentError,
 } = recruitmentsSlice.actions;
 
 export const getRecruitments = (): AppThunk => async (dispatch: Dispatch) => {
@@ -63,6 +80,18 @@ export const getRecruitments = (): AppThunk => async (dispatch: Dispatch) => {
     dispatch(setRecruitments(data));
   } catch (err) {
     dispatch(setRecruitmentsError(err.toString()));
+  }
+};
+
+export const createRecruitment = (formData: CreateRecruitmentFormData): AppThunk => async (
+  dispatch: Dispatch,
+) => {
+  try {
+    dispatch(createRecruitmentLoading());
+    const { data } = await api.createRecruitment(formData);
+    dispatch(createRecruitmentSuccess(data));
+  } catch (err) {
+    dispatch(createRecruitmentError(err.toString()));
   }
 };
 

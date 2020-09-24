@@ -22,7 +22,7 @@ const Table: React.FC<Props<Data>> = ({ columns, data }) => {
   return (
     <table
       {...getTableProps()}
-      className="w-full mt-4 overflow-hidden border-none border-collapse rounded-lg"
+      className="w-full mt-4 overflow-hidden border-none border-collapse rounded-lg custom-table"
     >
       <thead className="bg-gray-300 border-gray-300 rounded-lg">
         {headerGroups.map((headerGroup) => (

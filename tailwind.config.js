@@ -2,7 +2,7 @@ module.exports = {
   purge: [],
   target: 'relaxed',
   prefix: '',
-  important: false,
+  important: true,
   separator: ':',
   theme: {
     extend: {
@@ -21,7 +21,10 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    opacity: ['disabled'],
+    cursor: ['disabled'],
+  },
   corePlugins: {},
   plugins: [],
 };
