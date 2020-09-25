@@ -23,9 +23,11 @@
 .rc-picker-input input:focus {
   @apply outline-none bg-white border-gray-500;
 }
+
 .rc-picker-input input {
   appearance: none;
 }
+
 .form__field--error {
   @apply border-red-500;
 }
@@ -77,6 +79,7 @@
   .nav__link {
     @apply mr-8 mt-0;
   }
+
   .page {
     padding-top: 82px;
   }
@@ -101,7 +104,6 @@
 .custom-table tbody tr:hover td {
   @apply bg-gray-100;
 }
-
 
 .form-checkbox {
   @apply inline-block align-middle select-none flex-shrink-0 border rounded bg-white outline-none my-4;
@@ -134,27 +136,30 @@
 }
 
 .react-datepicker {
-  @apply border border-gray-100 shadow-md rounded-lg;
+  @apply border border-gray-200 rounded-lg shadow-lg;
 }
 
 .react-datepicker__day,
-.react-datepicker__day-name{
- @apply text-xs font-normal w-8 h-8 leading-8;
+.react-datepicker__day-name {
+
+  @apply font-normal w-8 h-8 leading-8 px-2;
 }
-.react-datepicker__day {
-  margin: 0.125em;
-}
+
 .react-datepicker__day:hover {
   @apply rounded-full;
 }
-.react-datepicker__day--selected {
-  @apply bg-primary-500;
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected{
+  @apply bg-primary-500 rounded-full;
 }
+
 .react-datepicker__day--outside-month {
   @apply text-gray-500;
 }
-.react-datepicker__day-names {
 
+.react-datepicker__day-names {
+  @apply px-2;
 }
 
 .react-datepicker__month {
@@ -162,10 +167,9 @@
 }
 
 .react-datepicker__day-name {
-  @apply lowercase text-gray-500;
+  @apply capitalize;
 }
 
 .react-datepicker__header {
   @apply bg-transparent border-none;
-
 }

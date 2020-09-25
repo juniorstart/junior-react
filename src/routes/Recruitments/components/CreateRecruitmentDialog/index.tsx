@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import dayjs from 'dayjs';
 import cs from 'classnames';
-import DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
 import Input from 'components/Input';
 import Dialog from 'components/Dialog';
+import Checkbox from 'components/Checbox';
 import msg from 'helpers/errorMessages';
-import { CreateRecruitmentFormData } from '../../../../types/CreateRecruitmentFormData';
-import Checkbox from '../../../../components/Checbox';
+import { CreateRecruitmentFormData } from 'types/CreateRecruitmentFormData';
+import Calendar from '../../../../components/DatePicker';
 
 interface CreateRecruitment {
   open: boolean;
@@ -42,6 +41,10 @@ const CreateRecruitmentDialog: React.FC<CreateRecruitment> = ({
     resolver: yupResolver(schema),
   });
 
+  const applicationDateValue = watch('applicationDate') as any;
+
+  console.log(applicationDateValue);
+
   const replyCompanyIsChecked = watch('companyReply', false);
 
   const {
@@ -54,26 +57,7 @@ const CreateRecruitmentDialog: React.FC<CreateRecruitment> = ({
     notes,
     linkToApplication,
   } = errors;
-  const [startDate, setStartDate] = useState(new Date());
 
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
-  const getYear = (date: Date) => {
-    return new Date(date).getFullYear();
-  };
   return (
     <Dialog
       loading={loading}
@@ -86,36 +70,6 @@ const CreateRecruitmentDialog: React.FC<CreateRecruitment> = ({
     >
       <form className="form flex flex-wrap" id="testForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__control">
-          <DatePicker
-            renderCustomHeader={({
-              date,
-              changeYear,
-              changeMonth,
-              decreaseMonth,
-              increaseMonth,
-              prevMonthButtonDisabled,
-              nextMonthButtonDisabled,
-            }) => (
-              <div
-                style={{
-                  margin: 10,
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}
-              >
-                {dayjs().format('MMMM')}
-                {getYear(date)}
-                <button type="button" onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-                  {'>'}
-                </button>
-                <button type="button" onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-                  {'<'}
-                </button>
-              </div>
-            )}
-            selected={startDate}
-            onChange={(date: any) => setStartDate(date)}
-          />
           <Input
             label="Company name"
             id="companyName"
@@ -154,7 +108,7 @@ const CreateRecruitmentDialog: React.FC<CreateRecruitment> = ({
               name="applicationDate"
               placeholderText="Select date"
               render={({ onChange, onBlur, value }) => (
-                <DatePicker
+                <Calendar
                   onChange={onChange}
                   onBlur={onBlur}
                   selected={value}
@@ -203,8 +157,15 @@ const CreateRecruitmentDialog: React.FC<CreateRecruitment> = ({
                 control={control}
                 id="dateOfCompanyReply"
                 name="dateOfCompanyReply"
-                defaultValue={null}
-                render={({ onChange, onBlur, value }) => <div />}
+                render={({ onChange, onBlur, value }) => (
+                  <Calendar
+                    minDate={applicationDateValue}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    selected={value}
+                    className="form__field"
+                  />
+                )}
               />
               <p className="form__error">{dateOfCompanyReply?.message}</p>
             </label>
