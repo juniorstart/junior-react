@@ -36,3 +36,16 @@ export interface Task {
   status: boolean;
   todoListId: number;
 }
+
+export interface RecruitmentsResponse {
+  id: number;
+  companyName: string;
+  city: string;
+  workPlace: string;
+  dateOfCompanyReply: string;
+  applicationDate: string;
+  companyReply: boolean;
+  notes: string;
+  linkToApplication: string;
+  ownerId: number;
+}

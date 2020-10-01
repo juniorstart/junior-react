@@ -1,23 +1,10 @@
 import { AxiosResponse } from 'axios';
 import axios from './axios';
 import apiRoutes from './routes';
-import { Recruitment } from './interfaces';
-
-interface Recruitments {
-  id: number;
-  companyName: string;
-  city: string;
-  workPlace: string;
-  dateOfCompanyReply: string;
-  applicationDate: string;
-  companyReply: boolean;
-  notes: string;
-  linkToApplication: string;
-  ownerId: number;
-}
+import { Recruitment, RecruitmentsResponse } from './interfaces';
 
 export default {
-  async getRecruitments(): Promise<Recruitments[]> {
+  async getRecruitments(): Promise<RecruitmentsResponse[]> {
     const { data } = await axios.get(apiRoutes.recruitment);
     return data;
   },
