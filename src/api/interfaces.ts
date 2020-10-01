@@ -14,11 +14,11 @@ export interface Recruitment {
   companyName: string;
   workPlace: string;
   notes: string;
-  dateOfCompanyReply: string;
+  dateOfCompanyReply?: Date;
   linkToApplication: string;
   city: string;
-  applicationDate: string;
-  companyReply: boolean;
+  applicationDate: Date;
+  companyReply?: boolean;
   ownerId?: string;
 }
 

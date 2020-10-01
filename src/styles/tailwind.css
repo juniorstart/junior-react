@@ -19998,6 +19998,16 @@ video {
   .page {
     padding-top: 82px;
   }
+
+  .form__control--horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form__control--horizontal .form__field {
+    width: 320px;
+  }
 }
 
 .custom-table thead th:first-child div {
@@ -20092,7 +20102,7 @@ video {
 }
 
 .react-datepicker__day--selected,
-.react-datepicker__day--keyboard-selected{
+.react-datepicker__day--keyboard-selected {
   --bg-opacity: 1;
   background-color: #2e5bff;
   background-color: rgba(46, 91, 255, var(--bg-opacity));

@@ -3,12 +3,27 @@ import axios from './axios';
 import apiRoutes from './routes';
 import { Recruitment } from './interfaces';
 
+interface Recruitments {
+  id: number;
+  companyName: string;
+  city: string;
+  workPlace: string;
+  dateOfCompanyReply: string;
+  applicationDate: string;
+  companyReply: boolean;
+  notes: string;
+  linkToApplication: string;
+  ownerId: number;
+}
+
 export default {
-  getRecruitments(): Promise<AxiosResponse> {
-    return axios.get(apiRoutes.recruitment);
+  async getRecruitments(): Promise<Recruitments[]> {
+    const { data } = await axios.get(apiRoutes.recruitment);
+    return data;
   },
-  createRecruitment(data: Recruitment): Promise<AxiosResponse> {
-    return axios.post(apiRoutes.recruitment, { ...data, id: 0, ownerId: 1 });
+  async createRecruitment(recruitment: Recruitment): Promise<AxiosResponse> {
+    const { data } = await axios.post(apiRoutes.recruitment, { ...recruitment, id: 0, ownerId: 1 });
+    return data;
   },
   getRecruitment(id: number): Promise<AxiosResponse> {
     return axios.get(`${apiRoutes.recruitment}/${id}`);

@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
       <NavLink exact className="nav__link" to="/">
         Todo list
       </NavLink>
-      <NavLink className="nav__link" to={routes.recruitments.path}>
+      <NavLink className="nav__link" to={routes.recruitments.root.path}>
         Recruitments
       </NavLink>
       <button className="nav__btn mt-4 md:mt-0" type="button" onClick={handleLogout}>

@@ -9,7 +9,7 @@ type RefReturn =
   | undefined;
 
 interface Input {
-  label: string;
+  label?: string;
   id: string;
   name?: string;
   className?: string;

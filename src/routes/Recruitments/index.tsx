@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {toast, ToastContainer} from 'react-toastify';
-import Table from 'components/Table';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import Page from 'components/Page';
+import Table from 'components/Table';
+import api from 'api/recruitments';
 import formatDate from 'helpers/date/formatDate';
-import { createRecruitment, getRecruitments, selectRecruitments } from './recruitmentsSlice';
-import CreateRecruitmentDialog from './components/CreateRecruitmentDialog';
-import { CreateRecruitmentFormData } from '../../types/CreateRecruitmentFormData';
-import ApiStatuses from '../../types/ApiStatuses';
-import 'react-toastify/dist/ReactToastify.css';
-import "react-datepicker/dist/react-datepicker.css";
-
+import { routes } from '../index';
 
 const columns = [
   { accessor: 'id', Header: 'Id' },
@@ -45,52 +40,26 @@ const columns = [
 ];
 
 const Recruitments: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const dispatch = useDispatch();
-  const { recruitments, updateStatus } = useSelector(selectRecruitments);
+  const history = useHistory();
 
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    dispatch(getRecruitments());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (updateStatus === ApiStatuses.succeeded) {
-      dispatch(getRecruitments());
-      handleClose();
-      toast("Will close after 15s", { autoClose: 15000 });
-    }
-  }, [updateStatus]);
-
-  if (!recruitments.length) return null;
-
-  const handleSubmit = (data: CreateRecruitmentFormData) => {
-    dispatch(createRecruitment(data));
+  const { data: recruitments, isLoading } = useQuery('rec', api.getRecruitments);
+  const handleClick = () => {
+    history.push(routes.recruitments.newRecruitment.path);
   };
 
   return (
     <Page title="Recruitments">
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-xl">Recruitments</h1>
-        <button type="submit" className="btn btn--primary block" onClick={handleOpen}>
+        <button type="submit" className="btn btn--primary block" onClick={handleClick}>
           Create new recruitment
         </button>
       </div>
-      <CreateRecruitmentDialog
-        onSubmit={handleSubmit}
-        loading={updateStatus === ApiStatuses.loading}
-        open={isOpen}
-        onClose={handleClose}
-      />
-      {recruitments.length && <Table data={recruitments} columns={columns} />}
-      <ToastContainer />
+      {isLoading ? (
+        <div>Loading</div>
+      ) : (
+        <>{recruitments && <Table data={recruitments} columns={columns} />}</>
+      )}
     </Page>
   );
 };

@@ -6,12 +6,16 @@ import HomePage from './Home';
 import Recruitments from './Recruitments';
 import Register from './Register';
 import Login from './Login';
+import NewRecruitment from './Recruitments/NewRecruitment';
 
 export const routes = {
   home: new PathLink('/'),
   register: new PathLink('/register'),
   login: new PathLink('/login'),
-  recruitments: new PathLink('/products'),
+  recruitments: {
+    root: new PathLink('/recruitments'),
+    newRecruitment: new PathLink('/recruitments/new'),
+  },
 };
 
 function Routes() {
@@ -23,7 +27,11 @@ function Routes() {
         <Route exact path={routes.home.path} component={HomePage} />
         <Route path={routes.register.path} component={Register} />
         <Route path={routes.login.path} component={Login} />
-        <AuthRequiredRoute path={routes.recruitments.path} component={Recruitments} />
+        <AuthRequiredRoute exact path={routes.recruitments.root.path} component={Recruitments} />
+        <AuthRequiredRoute
+          path={routes.recruitments.newRecruitment.path}
+          component={NewRecruitment}
+        />
       </Switch>
     </Suspense>
   );

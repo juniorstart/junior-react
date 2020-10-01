@@ -83,6 +83,14 @@
   .page {
     padding-top: 82px;
   }
+
+  .form__control--horizontal {
+    @apply flex justify-between items-center;
+  }
+
+  .form__control--horizontal .form__field {
+    width: 320px;
+  }
 }
 
 .custom-table thead th:first-child div {
@@ -141,7 +149,6 @@
 
 .react-datepicker__day,
 .react-datepicker__day-name {
-
   @apply font-normal w-8 h-8 leading-8 px-2;
 }
 
@@ -150,7 +157,7 @@
 }
 
 .react-datepicker__day--selected,
-.react-datepicker__day--keyboard-selected{
+.react-datepicker__day--keyboard-selected {
   @apply bg-primary-500 rounded-full;
 }
 
