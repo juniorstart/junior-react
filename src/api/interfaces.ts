@@ -14,11 +14,11 @@ export interface Recruitment {
   companyName: string;
   workPlace: string;
   notes: string;
-  dateOfCompanyReply: string;
+  dateOfCompanyReply?: Date;
   linkToApplication: string;
   city: string;
-  applicationDate: string;
-  companyReply: boolean;
+  applicationDate: Date;
+  companyReply?: boolean;
   ownerId?: string;
 }
 
@@ -35,4 +35,17 @@ export interface Task {
   description: string;
   status: boolean;
   todoListId: number;
+}
+
+export interface RecruitmentsResponse {
+  id: number;
+  companyName: string;
+  city: string;
+  workPlace: string;
+  dateOfCompanyReply: string;
+  applicationDate: string;
+  companyReply: boolean;
+  notes: string;
+  linkToApplication: string;
+  ownerId: number;
 }

@@ -53,7 +53,7 @@ const LoginForm: React.FC = () => {
   useEffect(() => {
     if (token && isTokenValid(token)) {
       setToken(token);
-      history.push(routes.recruitments.path);
+      history.push(routes.recruitments.root.path);
     }
   }, [token, history]);
 

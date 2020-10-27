@@ -6,4 +6,5 @@ export default {
   password:
     'Your password must be include at least one lowercase letter, one uppercase letter, one special character and a number.',
   login: 'This field must be starts with letter',
+  date: 'This field must be date'
 };
